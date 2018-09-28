@@ -14,7 +14,13 @@ class TarkovCommand extends Command {
     });
   }
 
-  async exec(message, args) {
+  async exec(message) {
+    let token = this.client.getAuthToken();
+
+    if (token == null) {
+      return message.reply('API service unavailable at this time. Please try again later.');
+    }
+
     let opts = {
       url: 'https://prod.escapefromtarkov.com/client/weather',
       method: 'POST',
@@ -25,7 +31,7 @@ class TarkovCommand extends Command {
         'User-Agent': 'UnityPlayer/5.6.6f2 (http://unity3d.com)',
         accept: '*/*',
         Connection: 'Keep-Alive',
-        Cookie: 'PHPSESSID=XXX',
+        Cookie: `PHPSESSID=${token}`,
         'X-Unity-Version': '5.6.6f2',
         'Content-Type': 'application/json',
       }

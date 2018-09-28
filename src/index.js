@@ -1,16 +1,18 @@
 require('dotenv').config();
 
 const { Database } = require('mongorito');
-const { AkairoClient } = require('discord-akairo');
+
+const Client = require('./client');
 
 // models
 const { User } = require('./models');
 
 
-const client = new AkairoClient({
+const client = new Client({
   ownerID: '325986883366551555',
   prefix: '!!!',
   commandDirectory: './src/commands/',
+  moduleDirectory: './src/modules',
 }, {
   disableEveryone: true,
 });
@@ -24,6 +26,17 @@ function registerModels() {
 }
 
 client.login(process.env.DISCORD_KEY).then(async (str) => {
+  try {
+    client.user.setPresence({
+      status: 'idle',
+      game: {
+        name: ' with Mosin scavs'
+      }
+    });
+  } catch (e) {
+    console.log('Error setting rich presence: ', e);
+  }
+
   // client has logged in, initialize database/
   console.log(`Discord client connected. Initializing database connection.`);
   try {

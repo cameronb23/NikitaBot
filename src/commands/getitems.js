@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const fs = require('fs');
 const pako = require('pako');
 const request = require('request-promise');
 
@@ -20,6 +19,12 @@ class GetItemsCommand extends Command {
   }
 
   async exec(message, args) {
+    let token = this.client.getAuthToken();
+
+    if (token == null) {
+      return message.reply('API service unavailable at this time. Please try again later.');
+    }
+    
     let opts = {
       url: 'https://prod.escapefromtarkov.com/client/items',
       method: 'POST',
@@ -30,7 +35,7 @@ class GetItemsCommand extends Command {
         'User-Agent': 'UnityPlayer/5.6.6f2 (http://unity3d.com)',
         accept: '*/*',
         Connection: 'Keep-Alive',
-        Cookie: 'PHPSESSID=XXX',
+        Cookie: `PHPSESSID=${token}`,
         'X-Unity-Version': '5.6.6f2',
         'Content-Type': 'application/json',
       }
