@@ -1,0 +1,14 @@
+.env
+
+node_modules/
+
+# yarn
+yarn.lock
+
+# test data files
+globals.json
+items.json
+login.json
+profiles.json
+traders.json
+weather.json

@@ -1,0 +1,29 @@
+{
+  "name": "NikitaBot",
+  "version": "0.0.1",
+  "description": "a stupid bot",
+  "main": "src/index.js",
+  "repository": "github.com/cameronb23/NikitaBot",
+  "author": "cameronb23",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --harmony src/index.js",
+    "start-babel": "babel-node src/index.js",
+    "start-nodemon": "nodemon --exec babel-node src/index.js"
+  },
+  "dependencies": {
+    "discord-akairo": "^7.5.5",
+    "discord.js": "^11.4.2",
+    "moment": "^2.22.2",
+    "mongorito": "^3.0.4",
+    "pako": "^1.0.6",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.4"
+  }
+}
