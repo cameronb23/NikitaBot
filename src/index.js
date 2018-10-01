@@ -5,7 +5,7 @@ const { Database } = require('mongorito');
 const Client = require('./client');
 
 // models
-const { User } = require('./models');
+const { User, Item } = require('./models');
 
 
 const client = new Client({
@@ -23,16 +23,12 @@ const database = new Database(process.env.MONGO_URL, {
 
 function registerModels() {
   database.register(User);
+  database.register(Item);
 }
 
 client.login(process.env.DISCORD_KEY).then(async (str) => {
   try {
-    client.user.setPresence({
-      status: 'idle',
-      game: {
-        name: ' with Mosin scavs'
-      }
-    });
+    client.user.setPresence({ game: { name: ' with Mosin scavs' } });
   } catch (e) {
     console.log('Error setting rich presence: ', e);
   }

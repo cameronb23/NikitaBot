@@ -32,6 +32,14 @@ class NikitaClient extends AkairoClient {
   setAuthToken(token) {
     this.authToken = token;
   }
+
+  getDatabase() {
+    return this.database;
+  }
+
+  setDatabase(db) {
+    this.database = db;
+  }
 }
 
 module.exports = NikitaClient;

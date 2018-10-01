@@ -18,7 +18,9 @@
     "mongorito": "^3.0.4",
     "pako": "^1.0.6",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.39.0",
+    "sqlite3": "^4.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

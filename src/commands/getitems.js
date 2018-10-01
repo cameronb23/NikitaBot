@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const fs = require('fs');
 const pako = require('pako');
 const request = require('request-promise');
 
@@ -61,7 +62,7 @@ class GetItemsCommand extends Command {
 
       let found = null;
 
-      Object.keys(items).forEach(id => {
+      Object.keys(items).forEach(async (id) => {
         let itemData = items[id]._props;
         if (itemData == null || itemData.ShortName == null)
           return;
@@ -69,10 +70,22 @@ class GetItemsCommand extends Command {
         if (itemData.ShortName.toLowerCase().includes(query)) {
           found = items[id];
         }
+
+        let item = items[id];
+
+        try {
+          await this.client.getDatabase().addItem(item);
+        } catch(e) {
+          console.log('Error adding item: ', e);
+        }
+      });
+
+      fs.writeFile('items.json', JSON.stringify(data), (e) => {
+        console.log(e);
       });
 
       if (found) {
-        return message.reply(`Found item: ${found._props.ShortName} - ${found._name} - Price: ${found._props.CreditsPrice}`);
+        return message.reply(`Found item: ${found._props.ShortName} - ${found._name} - Price: ${found._props.CreditsPrice} [${length}]`);
       }
     } catch (e) {
       console.log(e);
